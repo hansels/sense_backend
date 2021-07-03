@@ -1,0 +1,14 @@
+[Unit]
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+ExecStart=/home/a0050519/sense_backend/sense_backend
+WorkingDirectory=/home/a0050519/sense_backend
+User=a0050519
+Restart=on-failure
+RestartSec=5
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=%n
