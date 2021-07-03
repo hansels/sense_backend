@@ -2,6 +2,7 @@ package model
 
 type Resort struct {
 	Name        string   `json:"name,omitempty" structs:"name"`
+	Description string   `json:"description,omitempty" structs:"description"`
 	Price       float64  `json:"price,omitempty" structs:"price"`
 	Specialties []string `json:"specialties,omitempty" structs:"specialties"`
 	Amenities   []string `json:"amenities,omitempty" structs:"amenities"`
