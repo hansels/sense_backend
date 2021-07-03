@@ -164,6 +164,27 @@ func (a *API) Ping(w http.ResponseWriter, r *http.Request) *response.JSONRespons
 	return response.NewJSONResponse().SetData("Ping!!!")
 }
 
+func (a *API) InsertResort(w http.ResponseWriter, r *http.Request) *response.JSONResponse {
+	ctx := context.Background()
+
+	var resort model.Resort
+	err := json.NewDecoder(r.Body).Decode(&resort)
+	if err != nil {
+		log.Errorln("Resort Json Decode Error : %+v", err)
+		return response.NewJSONResponse().SetError(response.ErrBadRequest).SetMessage("Bad Request")
+	}
+
+	doc := a.Module.Firestore.Collection("resorts").Doc(resort.Name)
+
+	_, err = doc.Set(ctx, structs.Map(resort))
+	if err != nil {
+		log.Errorln("Write to Firestore error : %+v", err)
+		return response.NewJSONResponse().SetError(response.ErrBadRequest).SetMessage("Bad Request")
+	}
+
+	return response.NewJSONResponse().SetData("OK")
+}
+
 func (a *API) generateResultFromML(outcome *ml.ObjectDetectionResponse) (*model.PredictionResult, error) {
 	if outcome.NumDetections == 0 {
 		return &model.PredictionResult{IsDetected: false}, nil

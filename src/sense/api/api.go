@@ -13,6 +13,8 @@ func (a *API) Register(router *httprouter.Router) {
 	router.POST("/login", myRouter.HandleNow("/login", a.Login))
 	router.POST("/register", myRouter.HandleNow("/register", a.RegisterUser))
 	router.POST("/predict", myRouter.HandleNow("/predict", a.Predict))
+
+	router.POST("/internal/resort", myRouter.HandleNow("/internal/resort", a.InsertResort))
 }
 
 type API struct {
