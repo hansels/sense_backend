@@ -11,5 +11,6 @@ type Resort struct {
 	Address     string   `json:"address,omitempty" structs:"address"`
 	Reviews     []Review `json:"reviews,omitempty" structs:"reviews"`
 	Images      []string `json:"images,omitempty" structs:"images"`
+	Rating      float64  `json:"rating,omitempty" structs:"rating"`
 	Tags        []string `json:"tags,omitempty" structs:"tags"`
 }
